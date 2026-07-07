@@ -46,6 +46,59 @@
             align-items: center;
             justify-content: center;
         }
+        <style>
+  .slot-container {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  .task-ribbon {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e0d0f7;
+    border-radius: 30px;
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  }
+  .task-text {
+    font-size: 1.25rem; /* ~ h5 size */
+    color: #333;
+    margin: 0;
+  }
+  .watch-btn {
+    position: relative;
+    background-color: #ba8ef7; /* Light Violet */
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 1.17rem; /* ~ h3 size */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Creates the lifted effect */
+    transition: all 0.3s ease;
+  }
+  .watch-btn:hover {
+    background-color: #9b65e6;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px); /* Slight lift on hover */
+  }
+</style>
+
+<div class="slot-container">
+  <!-- Task 1 to 50 will go here -->
+  <div class="task-ribbon">
+    <h5 class="task-text">Task 1: Complete simple data entry</h5>
+    <button class="watch-btn">Watch Ad</button>
+  </div>
+  <div class="task-ribbon">
+    <h5 class="task-text">Task 2: Share an opinion</h5>
+    <button class="watch-btn">Watch Ad</button>
+  </div>
+</div>
+    
         .ticker-text {
             font-size: 1em;
             color: #333;
