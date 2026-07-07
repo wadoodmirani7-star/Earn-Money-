@@ -317,55 +317,40 @@
     </div>
 </div>
 <script>
-    // Function to update task status on click
+    let totalTasks = 50;
+let completedTasks = 0;
+let totalMoney = 0;
+
 function updateTask(buttonElement) {
-    let taskRow = buttonElement.closest('.task-row');
-    let taskId = taskRow.getAttribute('id');
-    
-    taskRow.style.display = 'none';
-    localStorage.setItem(taskId, 'completed');
+    let taskRow = buttonElement.closest('.task-ribbon');
+    if (taskRow) {
+        taskRow.style.display = 'none';
+        totalTasks -= 1;
+        completedTasks += 1;
+        totalMoney += 15;
 
-    totalTasks -= 1;
-    completedTasks += 1;
-    totalMoney += 15;
-
-    totalTasksElement.textContent = totalTasks;
-    completedTasksElement.textContent = completedTasks;
-    totalMoneyElement.textContent = 'Rs ' + totalMoney;
-
-    if (totalTasks === 0) {
-        taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
+        document.getElementById('total-tasks').textContent = totalTasks;
+        document.getElementById('completed-tasks').textContent = completedTasks;
+        document.getElementById('total-money').textContent = 'Rs ' + totalMoney;
     }
 }
 
-// Function to check localStorage on page load and hide completed tasks
-window.onload = function() {
-    let taskRows = document.querySelectorAll('.task-row');
-    taskRows.forEach(function(row) {
-        let taskId = row.getAttribute('id');
-        if (localStorage.getItem(taskId) === 'completed') {
-            row.style.display = 'none';
-        }
-    });
-
-    // Function to calculate time until midnight and refresh the page
-    function autoRefreshAtMidnight() {
-        let now = new Date();
-        let night = new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate() + 1, // Next day
-            0, 0, 0 // 12:00:00 AM
-        );
-        let msToMidnight = night.getTime() - now.getTime();
-        
-        setTimeout(function() {
-            location.reload();
-        }, msToMidnight);
-    }
+function autoRefreshAtMidnight() {
+    let now = new Date();
+    let night = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1,
+        0, 0, 0
+    );
+    let msToMidnight = night.getTime() - now.getTime();
     
-    autoRefreshAtMidnight();
-};
+    setTimeout(function() {
+        location.reload();
+    }, msToMidnight);
+}
+
+autoRefreshAtMidnight();
     
 </script>
     <script>
