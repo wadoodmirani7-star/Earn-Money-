@@ -35,21 +35,25 @@
         .ticker-container {
             margin-top: 30px;
             background-color: #e6e6e6;
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
             overflow: hidden;
-            white-space: nowrap;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .ticker-text {
-            display: inline-block;
-            animation: ticker 15s linear infinite;
+            font-size: 1em;
+            color: #333;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
-        @keyframes ticker {
-            0% { transform: translate(100%, 0); }
-            100% { transform: translate(-100%, 0); }
+        .ticker-text.show {
+            opacity: 1;
         }
     </style>
 </head>
@@ -65,27 +69,33 @@
     </div>
 
     <div class="ticker-container">
-        <div class="ticker-text" id="ticker-message">Loading...</div>
+        <div class="ticker-text" id="ticker-message"></div>
     </div>
 
     <script>
         const messages = [
-            "Ali has withdrawn Rs 50,000 via EasyPaisa (Phone: 0314-15*****)",
-            "Sara has withdrawn Rs 30,000 via JazzCash (Phone: 0300-12*****)",
-            "Khan has withdrawn Rs 10,000 via EasyPaisa (Phone: 0321-78*****)",
-            "Fatima has withdrawn Rs 3,000 via JazzCash (Phone: 0333-45*****)"
+            "Ali Arain has withdrawn Rs 50,000 via EasyPaisa (Phone: 0314-15*****)",
+            "Sara Malik has withdrawn Rs 30,000 via JazzCash (Phone: 0300-12*****)",
+            "Khan Pathan has withdrawn Rs 10,000 via EasyPaisa (Phone: 0321-78*****)",
+            "Fatima Abbasi has withdrawn Rs 3,000 via JazzCash (Phone: 0333-45*****)"
         ];
 
         let index = 0;
         const messageElement = document.getElementById("ticker-message");
 
-        function updateMessage() {
-            messageElement.textContent = messages[index];
-            index = (index + 1) % messages.length;
+        function showNextMessage() {
+            messageElement.classList.remove('show');
+            
+            setTimeout(() => {
+                messageElement.textContent = messages[index];
+                messageElement.classList.add('show');
+                
+                index = (index + 1) % messages.length;
+            }, 1000); 
         }
 
-        setInterval(updateMessage, 2000);
-        updateMessage();
+        setInterval(showNextMessage, 5000);
+        showNextMessage();
     </script>
 
 </body>
