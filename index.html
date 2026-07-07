@@ -317,36 +317,56 @@
     </div>
 </div>
 <script>
-    let totalTasksElement = document.getElementById('total-tasks');
-let completedTasksElement = document.getElementById('completed-tasks');
-let totalMoneyElement = document.getElementById('total-money');
-let taskListContainer = document.getElementById('task-list');
-
-let totalTasks = 50;
-let completedTasks = 0;
-let totalMoney = 0;
-
+    // Function to update task status on click
 function updateTask(buttonElement) {
-    // Hide the task row
     let taskRow = buttonElement.closest('.task-row');
+    let taskId = taskRow.getAttribute('id');
+    
     taskRow.style.display = 'none';
+    localStorage.setItem(taskId, 'completed');
 
-    // Update counters
     totalTasks -= 1;
     completedTasks += 1;
     totalMoney += 15;
 
-    // Update the UI
     totalTasksElement.textContent = totalTasks;
     completedTasksElement.textContent = completedTasks;
     totalMoneyElement.textContent = 'Rs ' + totalMoney;
 
-    // Check if all tasks are completed
     if (totalTasks === 0) {
         taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
     }
 }
 
+// Function to check localStorage on page load and hide completed tasks
+window.onload = function() {
+    let taskRows = document.querySelectorAll('.task-row');
+    taskRows.forEach(function(row) {
+        let taskId = row.getAttribute('id');
+        if (localStorage.getItem(taskId) === 'completed') {
+            row.style.display = 'none';
+        }
+    });
+
+    // Function to calculate time until midnight and refresh the page
+    function autoRefreshAtMidnight() {
+        let now = new Date();
+        let night = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1, // Next day
+            0, 0, 0 // 12:00:00 AM
+        );
+        let msToMidnight = night.getTime() - now.getTime();
+        
+        setTimeout(function() {
+            location.reload();
+        }, msToMidnight);
+    }
+    
+    autoRefreshAtMidnight();
+};
+    
     <script>
         const messages = [
             "Ali Rajput has withdrawn Rs 50,000 via EasyPaisa (Phone: 0314-15*****)",
