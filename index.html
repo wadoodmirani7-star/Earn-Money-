@@ -4,6 +4,61 @@
     <meta charset="UTF-8">
     <title>Earn Money</title>
     <style>
+    .menu-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+    }
+    .menu-btn span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+    }
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        overflow-x: hidden;
+        transition: 0.3s;
+        padding-top: 60px;
+        z-index: 999;
+    }
+    .sidebar.active {
+        width: 250px;
+    }
+    .sidebar button {
+        padding: 15px 25px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #333;
+        display: block;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    .sidebar button:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+
+    <style>
+        
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -52,6 +107,17 @@
     
 </head>
 <body>
+<button class="menu-btn" onclick="toggleNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div id="mySidebar" class="sidebar">
+    <button onclick="alert('Withdraw clicked')">Withdraw</button>
+    <button onclick="alert('Referral clicked')">Referral</button>
+    <button onclick="alert('Login clicked')">Login</button>
+</div>
 
     <h1>Earn Money</h1>
     <hr>
@@ -316,41 +382,73 @@
 
     </div>
 </div>
+
 <script>
-    let totalTasks = 50;
+    function toggleNav() {
+        const sidebar = document.getElementById("mySidebar");
+        sidebar.classList.toggle("active");
+    }
+</script>
+
+<script>
+     let totalTasks = 50;
 let completedTasks = 0;
 let totalMoney = 0;
+
+const totalTasksElement = document.getElementById('total-tasks');
+const completedTasksElement = document.getElementById('completed-tasks');
+const totalMoneyElement = document.getElementById('total-money');
+const taskListContainer = document.getElementById('task-list-container');
 
 function updateTask(buttonElement) {
     let taskRow = buttonElement.closest('.task-ribbon');
     if (taskRow) {
         taskRow.style.display = 'none';
+        let taskId = taskRow.getAttribute('id');
+        if (taskId) {
+            localStorage.setItem(taskId, 'completed');
+        }
+
         totalTasks -= 1;
         completedTasks += 1;
         totalMoney += 15;
 
-        document.getElementById('total-tasks').textContent = totalTasks;
-        document.getElementById('completed-tasks').textContent = completedTasks;
-        document.getElementById('total-money').textContent = 'Rs ' + totalMoney;
+        totalTasksElement.textContent = totalTasks;
+        completedTasksElement.textContent = completedTasks;
+        totalMoneyElement.textContent = 'Rs ' + totalMoney;
+
+        if (totalTasks === 0) {
+            taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
+        }
     }
 }
 
-function autoRefreshAtMidnight() {
-    let now = new Date();
-    let night = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate() + 1,
-        0, 0, 0
-    );
-    let msToMidnight = night.getTime() - now.getTime();
-    
-    setTimeout(function() {
-        location.reload();
-    }, msToMidnight);
-}
+window.onload = function() {
+    let taskRows = document.querySelectorAll('.task-ribbon');
+    taskRows.forEach(function(row) {
+        let taskId = row.getAttribute('id');
+        if (taskId && localStorage.getItem(taskId) === 'completed') {
+            row.style.display = 'none';
+        }
+    });
 
-autoRefreshAtMidnight();
+    function autoRefreshAtMidnight() {
+        let now = new Date();
+        let night = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1,
+            0, 0, 0
+        );
+        let msToMidnight = night.getTime() - now.getTime();
+        
+        setTimeout(function() {
+            location.reload();
+        }, msToMidnight);
+    }
+    
+    autoRefreshAtMidnight();
+};
     
 </script>
     <script>
