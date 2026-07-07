@@ -59,7 +59,7 @@
         <h3>Total Tasks: 50</h3>
         <h3>Completed Tasks: <span id="completed">0</span></h3>
         <h3>Referrals: <span id="referrals">0</span></h3>
-        <h3>Total Money: $<span id="money">0</span></h3>
+        <h3>Total Money: Rs<span id="money">0</span></h3>
     </div>
 
     <div class="ticker-container">
@@ -110,7 +110,7 @@
 <div class="slot-container">
   <!-- Task 1 to 50 will go here -->
   <div class="task-ribbon">
-    <h5 class="task-text">Task 1:<h2>15</h5>
+    <h5 class="task-text">Task 1:<h2>Rs15</h5>
     <a href="https://www.effectivecpmnetwork.com/w67qwzb1dg?key=82fabef65b0b62b82ee060f25b5a100e" target="_blank" class="watch-btn">Watch Ad</a>
 </div>
 <div class="task-ribbon">
@@ -316,6 +316,36 @@
 
     </div>
 </div>
+<script>
+    let totalTasksElement = document.getElementById('total-tasks');
+let completedTasksElement = document.getElementById('completed-tasks');
+let totalMoneyElement = document.getElementById('total-money');
+let taskListContainer = document.getElementById('task-list');
+
+let totalTasks = 50;
+let completedTasks = 0;
+let totalMoney = 0;
+
+function updateTask(buttonElement) {
+    // Hide the task row
+    let taskRow = buttonElement.closest('.task-row');
+    taskRow.style.display = 'none';
+
+    // Update counters
+    totalTasks -= 1;
+    completedTasks += 1;
+    totalMoney += 15;
+
+    // Update the UI
+    totalTasksElement.textContent = totalTasks;
+    completedTasksElement.textContent = completedTasks;
+    totalMoneyElement.textContent = 'Rs ' + totalMoney;
+
+    // Check if all tasks are completed
+    if (totalTasks === 0) {
+        taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
+    }
+}
 
     <script>
         const messages = [
