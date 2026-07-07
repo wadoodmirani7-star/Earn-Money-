@@ -45,8 +45,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
+    
         }
-        <style>
+    </style>
+</head>
+<body>
+
+    <h1>Earn Money</h1>
+    <hr>
+    <div class="stats-container">
+        <h3>Total Tasks: 50</h3>
+        <h3>Completed Tasks: <span id="completed">0</span></h3>
+        <h3>Referrals: <span id="referrals">0</span></h3>
+        <h3>Total Money: $<span id="money">0</span></h3>
+    </div>
+
+    <div class="ticker-container">
+        <div class="ticker-text" id="ticker-message"></div>
+    </div>
+<br>
+    <style>
   .slot-container {
     margin-top: 50px;
     padding: 20px;
@@ -98,32 +116,6 @@
     <button class="watch-btn">Watch Ad</button>
   </div>
 </div>
-    
-        .ticker-text {
-            font-size: 1em;
-            color: #333;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .ticker-text.show {
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Earn Money</h1>
-    <hr>
-    <div class="stats-container">
-        <h3>Total Tasks: 50</h3>
-        <h3>Completed Tasks: <span id="completed">0</span></h3>
-        <h3>Referrals: <span id="referrals">0</span></h3>
-        <h3>Total Money: $<span id="money">0</span></h3>
-    </div>
-
-    <div class="ticker-container">
-        <div class="ticker-text" id="ticker-message"></div>
-    </div>
 
     <script>
         const messages = [
