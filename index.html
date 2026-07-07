@@ -390,48 +390,48 @@
         sidebar.classList.toggle("active");
     }
 </script>
-
 <script>
-     let totalTasks = 50;
-let completedTasks = 0;
-let totalMoney = 0;
+    let totalTasks = 50;
+    let completedTasks = 0;
+    let totalMoney = 0;
 
-const totalTasksElement = document.getElementById('total-tasks');
-const completedTasksElement = document.getElementById('completed-tasks');
-const totalMoneyElement = document.getElementById('total-money');
-const taskListContainer = document.getElementById('task-list-container');
+    const totalTasksElement = document.getElementById('total-tasks');
+    const completedTasksElement = document.getElementById('completed-tasks');
+    const totalMoneyElement = document.getElementById('total-money');
+    const taskListContainer = document.getElementById('task-list-container');
 
-function updateTask(buttonElement) {
-    let taskRow = buttonElement.closest('.task-ribbon');
-    if (taskRow) {
-        taskRow.style.display = 'none';
-        let taskId = taskRow.getAttribute('id');
-        if (taskId) {
-            localStorage.setItem(taskId, 'completed');
-        }
+    function updateTask(buttonElement) {
+        let taskRow = buttonElement.closest('.task-ribbon');
+        if (taskRow) {
+            taskRow.style.display = 'none';
+            let taskId = taskRow.getAttribute('id');
+            if (taskId) {
+                localStorage.setItem(taskId, 'completed');
+            }
 
-        totalTasks -= 1;
-        completedTasks += 1;
-        totalMoney += 15;
+            totalTasks -= 1;
+            completedTasks += 1;
+            totalMoney += 15;
 
-        totalTasksElement.textContent = totalTasks;
-        completedTasksElement.textContent = completedTasks;
-        totalMoneyElement.textContent = 'Rs ' + totalMoney;
+            totalTasksElement.textContent = totalTasks;
+            completedTasksElement.textContent = completedTasks;
+            totalMoneyElement.textContent = 'Rs ' + totalMoney;
 
-        if (totalTasks === 0) {
-            taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
+            if (totalTasks === 0) {
+                taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
+            }
         }
     }
-}
 
-window.onload = function() {
-    let taskRows = document.querySelectorAll('.task-ribbon');
-    taskRows.forEach(function(row) {
-        let taskId = row.getAttribute('id');
-        if (taskId && localStorage.getItem(taskId) === 'completed') {
-            row.style.display = 'none';
-        }
-    });
+    window.onload = function() {
+        let taskRows = document.querySelectorAll('.task-ribbon');
+        taskRows.forEach(function(row) {
+            let taskId = row.getAttribute('id');
+            if (taskId && localStorage.getItem(taskId) === 'completed') {
+                row.style.display = 'none';
+            }
+        });
+    };
 
     function autoRefreshAtMidnight() {
         let now = new Date();
@@ -442,16 +442,15 @@ window.onload = function() {
             0, 0, 0
         );
         let msToMidnight = night.getTime() - now.getTime();
-        
+
         setTimeout(function() {
             location.reload();
         }, msToMidnight);
     }
-    
+
     autoRefreshAtMidnight();
-};
-    
 </script>
+    
     <script>
         const messages = [
             "Ali Rajput has withdrawn Rs 50,000 via EasyPaisa (Phone: 0314-15*****)",
