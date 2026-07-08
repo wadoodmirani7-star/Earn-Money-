@@ -394,7 +394,6 @@
 const totalTasksElement = document.getElementById('total-tasks');
 const completedTaskElement = document.getElementById('completed');
 const totalMoneyElement = document.getElementById('total-money');
-const taskListContainer = document.getElementById('task-list-container');
 
 let totalTasks = 50;
 let completedTasks = 0;
@@ -404,30 +403,30 @@ document.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('watch-btn')) {
         if (totalTasks > 0) {
             totalTasks -= 1;
-            completedTasks += 1;
-            totalMoney += 15;
-            
-            totalTasksElement.textContent = "Total Tasks: " + totalTasks;
-            completedTaskElement.textContent = completedTasks;
-            totalMoneyElement.textContent = totalMoney;
+        }
+        completedTasks += 1;
+        totalMoney += 15;
 
-            let taskRow = event.target.closest('.task-row');
-            if (taskRow) {
-                let taskId = taskRow.getAttribute('id');
-                if (taskId) {
-                    localStorage.setItem(taskId, 'completed');
-                }
+        totalTasksElement.innerText = "Total Tasks: " + totalTasks;
+        completedTaskElement.innerText = completedTasks;
+        totalMoneyElement.innerText = "Rs " + totalMoney;
+
+        let taskRibbon = event.target.closest('.task-ribbon');
+        if (taskRibbon) {
+            let taskId = taskRibbon.getAttribute('id');
+            if (taskId) {
+                localStorage.setItem(taskId, 'completed');
             }
         }
     }
 });
 
 window.onload = function() {
-    let taskRows = document.querySelectorAll('.task-row');
-    taskRows.forEach(function(row) {
-        let taskId = row.getAttribute('id');
+    let taskRibbons = document.querySelectorAll('.task-ribbon');
+    taskRibbons.forEach(function(ribbon) {
+        let taskId = ribbon.getAttribute('id');
         if (taskId && localStorage.getItem(taskId) === 'completed') {
-            row.style.display = 'none';
+            ribbon.style.display = 'none';
         }
     });
 };
@@ -448,6 +447,7 @@ function autoRefreshAtMidnight() {
 }
 autoRefreshAtMidnight();
     </script>
+    
     
     <script>
         const messages = [
