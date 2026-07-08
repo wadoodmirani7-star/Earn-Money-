@@ -397,9 +397,21 @@
     }
 });
     
-    let totalTasks = 50;
-    let completedTasks = 0;
-    let totalMoney = 0;
+     let totalTasks = 50;
+let completedTasks = 0;
+let totalMoney = 0;
+
+function updateTask(buttonElement) {
+    totalTasks--;
+    completedTasks++;
+    totalMoney += 15;
+
+    totalTasksElement.textContent = totalTasks;
+    completedtaskElement.textContent = completedTasks;
+    totalMoneyElement.textContent = totalMoney;
+}
+    
+    
 
     const totalTasksElement = document.getElementById('total-tasks');
     const completedtaskElement = document.getElementById('completed-tasks');
