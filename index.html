@@ -391,7 +391,7 @@
     }
 </script>
     <script>
-        let totalTasks = 50;
+    let totalTasks = 50;
 let completedCount = 0;
 let moneyCount = 0;
 
@@ -409,21 +409,6 @@ document.addEventListener('click', function(event) {
     }
 });
     </script>
-    <script>
-    let completedCount = 0;
-    let moneyCount = 0;
-
-    document.addEventListener('click', function(event) {
-        if (event.target && event.target.classList.contains('watch-btn')) {
-            completedCount += 1;
-            moneyCount += 15;
-            
-            document.getElementById('completed').innerText = completedCount;
-            document.getElementById('money').innerText = moneyCount;
-        }
-    });
-    </script>
-    
 <script>
     const totalTasksElement = document.getElementById('total-tasks');
     const completedTaskElement = document.getElementById('completed');
