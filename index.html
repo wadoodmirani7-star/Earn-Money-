@@ -407,28 +407,6 @@
     });
 
     function updateTask(buttonElement) {
-        totalTasks--;
-        completedTasks++;
-        totalMoney += 15;
-
-        totalTasksElement.textContent = totalTasks;
-        completedTaskElement.textContent = completedTasks;
-        totalMoneyElement.textContent = totalMoney;
-
-        // Optionally disable the clicked button or remove the task
-        buttonElement.disabled = true;
-        buttonElement.textContent = "Watched";
-    }
-</script>
-    
-  <script> 
-
-    const totalTasksElement = document.getElementById('total-tasks');
-    const completedtaskElement = document.getElementById('completed-tasks');
-    const totalMoneyElement = document.getElementById('total-money');
-    const taskListContainer = document.getElementById('task-list-container');
-
-    function updateTask(buttonElement) {
         let taskRow = buttonElement.closest('.task-ribbon');
         if (taskRow) {
             taskRow.style.display = 'none';
@@ -436,19 +414,15 @@
             if (taskId) {
                 localStorage.setItem(taskId, 'completed');
             }
-
-            totalTasks -= 1;
-            completedTasks += 1;
-            totalMoney += 15;
-
-            totalTasksElement.textContent = totalTasks;
-            completedTasksElement.textContent = completedTasks;
-            totalMoneyElement.textContent = 'Rs ' + totalMoney;
-
-            if (totalTasks === 0) {
-                taskListContainer.innerHTML = '<div class="refresh-message">Refresh Timing 12 AM</div>';
-            }
         }
+        
+        totalTasks -= 1;
+        completedTasks += 1;
+        totalMoney += 15;
+
+        totalTasksElement.textContent = totalTasks;
+        completedTaskElement.textContent = completedTasks;
+        totalMoneyElement.textContent = 'Rs ' + totalMoney;
     }
 
     window.onload = function() {
@@ -470,12 +444,10 @@
             0, 0, 0
         );
         let msToMidnight = night.getTime() - now.getTime();
-
         setTimeout(function() {
             location.reload();
         }, msToMidnight);
     }
-
     autoRefreshAtMidnight();
 </script>
     
