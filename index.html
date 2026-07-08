@@ -391,25 +391,35 @@
     }
 </script>
 <script>
+    const totalTasksElement = document.getElementById('total-tasks');
+    const completedTaskElement = document.getElementById('completed-tasks');
+    const totalMoneyElement = document.getElementById('total-money');
+    const taskListContainer = document.getElementById('task-list-container');
+
+    let totalTasks = 50;
+    let completedTasks = 0;
+    let totalMoney = 0;
+
     document.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('watch-btn')) {
-        updateTask(event.target);
+        if (event.target && event.target.classList.contains('watch-btn')) {
+            updateTask(event.target);
+        }
+    });
+
+    function updateTask(buttonElement) {
+        totalTasks--;
+        completedTasks++;
+        totalMoney += 15;
+
+        totalTasksElement.textContent = totalTasks;
+        completedTaskElement.textContent = completedTasks;
+        totalMoneyElement.textContent = totalMoney;
+
+        // Optionally disable the clicked button or remove the task
+        buttonElement.disabled = true;
+        buttonElement.textContent = "Watched";
     }
-});
-    
-     let TotalTasks = 50;
-let CompletedTasks = 0;
-let TotalMoney = 0;
-
-function updateTask(buttonElement) {
-    TotalTasks--;
-    CompletedTasks++;
-    TotalMoney += 15;
-
-    TotalTasksElement.textContent = TotalTasks;
-    CompletedTaskElement.textContent = CompletedTasks;
-    TotalMoneyElement.textContent = TotalMoney;
-}
+</script>
     
     
 
