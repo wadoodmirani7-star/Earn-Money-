@@ -391,63 +391,25 @@
     }
 </script>
     <script>
-const totalTasksElement = document.getElementById('total-tasks');
-const completedTaskElement = document.getElementById('completed');
-const totalMoneyElement = document.getElementById('total-money');
-
-let totalTasks = 50;
-let completedTasks = 0;
-let totalMoney = 0;
-
-document.addEventListener('click', function(event) {
+    document.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('watch-btn')) {
+        let taskRibbon = event.target.closest('.task-ribbon');
+        if (taskRibbon) {
+            taskRibbon.style.display = 'none';
+        }
+        
         if (totalTasks > 0) {
             totalTasks -= 1;
         }
         completedTasks += 1;
         totalMoney += 15;
 
-        totalTasksElement.innerText = "Total Tasks: " + totalTasks;
-        completedTaskElement.innerText = completedTasks;
-        totalMoneyElement.innerText = "Rs " + totalMoney;
-
-        let taskRibbon = event.target.closest('.task-ribbon');
-        if (taskRibbon) {
-            let taskId = taskRibbon.getAttribute('id');
-            if (taskId) {
-                localStorage.setItem(taskId, 'completed');
-            }
-        }
+        document.getElementById('total-tasks').innerText = "Total Tasks: " + totalTasks;
+        document.getElementById('completed').innerText = completedTasks;
+        document.getElementById('total-money').innerText = "Rs " + totalMoney;
     }
 });
-
-window.onload = function() {
-    let taskRibbons = document.querySelectorAll('.task-ribbon');
-    taskRibbons.forEach(function(ribbon) {
-        let taskId = ribbon.getAttribute('id');
-        if (taskId && localStorage.getItem(taskId) === 'completed') {
-            ribbon.style.display = 'none';
-        }
-    });
-};
-
-function autoRefreshAtMidnight() {
-    let now = new Date();
-    let night = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate() + 1,
-        0, 0, 0
-    );
-    let msToMidnight = night.getTime() - now.getTime();
-    
-    setTimeout(function() {
-        location.reload();
-    }, msToMidnight);
-}
-autoRefreshAtMidnight();
-    </script>
-    
+</script>
     
     <script>
         const messages = [
