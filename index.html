@@ -414,7 +414,7 @@ document.getElementById('total-money').innerText = "Rs " + totalMoney;
 });
 </script>
     <script>
-function updateDashboard() {
+    function updateDashboard() {
     if (totalTasks > 0) {
         totalTasks -= 1;
     }
@@ -427,9 +427,9 @@ function updateDashboard() {
 
     document.getElementById('total-tasks').innerText = "Total Tasks: " + totalTasks;
     document.getElementById('completed').innerText = completedTasks;
-    document.getElementById('total-money').innerText = "Rs " + totalMoney;
+    document.getElementById('money').innerText = "Rs " + totalMoney;
 }
-</script>
+    </script>
     <script>
         const messages = [
             "Ali Rajput has withdrawn Rs 50,000 via EasyPaisa (Phone: 0314-15*****)",
